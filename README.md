@@ -20,7 +20,7 @@ Tick these off as you go, and commit after each one.
       Hint: LoRA adapter injection & training (`lfllm-lflora`)
 - [x] **3. Build a Streamlit interface where users can ask questions and get answers.**  
       Hint: Streamlit UI development
-- [ ] **4. Verify the accuracy and relevance of the generated answers.**  
+- [x] **4. Verify the accuracy and relevance of the generated answers.**  
       Hint: Qualitative evaluation
 - [ ] **5. Implement adapter merging for inference.**  
       Hint: Adapter merging (`lfllm-lflora`)

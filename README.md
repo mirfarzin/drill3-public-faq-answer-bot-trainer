@@ -18,7 +18,7 @@ Tick these off as you go, and commit after each one.
       Hint: Data preparation & formatting
 - [x] **2. Implement LoRA adapter injection and training on a pre-trained LLM (e.g., GPT-2).**  
       Hint: LoRA adapter injection & training (`lfllm-lflora`)
-- [ ] **3. Build a Streamlit interface where users can ask questions and get answers.**  
+- [x] **3. Build a Streamlit interface where users can ask questions and get answers.**  
       Hint: Streamlit UI development
 - [ ] **4. Verify the accuracy and relevance of the generated answers.**  
       Hint: Qualitative evaluation

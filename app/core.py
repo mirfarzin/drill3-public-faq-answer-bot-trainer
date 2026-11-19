@@ -44,6 +44,7 @@ class FAQItem:
     answer: str
     category: str = "General Public Service"
     source: str = "Municipal Department Guidelines"
+    jurisdiction: str = "Municipal Standard Guideline"
 
     def to_dict(self) -> Dict[str, str]:
         return {
@@ -51,6 +52,7 @@ class FAQItem:
             "answer": self.answer.strip(),
             "category": self.category.strip(),
             "source": self.source.strip(),
+            "jurisdiction": self.jurisdiction.strip(),
         }
 
     def format_prompt(self) -> str:
@@ -95,7 +97,8 @@ class FAQDataset:
                 continue  # skip invalid/empty records during loading
             cat = row.get("category", "General").strip() or "General"
             src = row.get("source", "Department Guidance").strip() or "Department Guidance"
-            items.append(FAQItem(question=q, answer=a, category=cat, source=src))
+            jur = row.get("jurisdiction", "Municipal Standard").strip() or "Municipal Standard"
+            items.append(FAQItem(question=q, answer=a, category=cat, source=src, jurisdiction=jur))
         return cls(items)
 
     @classmethod
@@ -113,7 +116,8 @@ class FAQDataset:
                     continue
                 cat = (row.get("category") or "General").strip() or "General"
                 src = (row.get("source") or "Department Guidance").strip() or "Department Guidance"
-                items.append(FAQItem(question=q, answer=a, category=cat, source=src))
+                jur = (row.get("jurisdiction") or "Municipal Standard").strip() or "Municipal Standard"
+                items.append(FAQItem(question=q, answer=a, category=cat, source=src, jurisdiction=jur))
         return cls(items)
 
     def validate(self) -> Dict[str, Any]:

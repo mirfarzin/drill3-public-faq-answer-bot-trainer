@@ -95,10 +95,10 @@ $$\text{output} = x \cdot W_0 + \mathbf{0} = x \cdot W_0$$
 ### 3. Forward Pass During Adaptation
 $$h = \text{base\_layer}(x) + \left(\text{Dropout}(x) \cdot A \cdot B\right) \times \frac{\alpha}{r}$$
 
-### 4. Adapter Merging for Zero-Latency Production Deployment
+### 4. Adapter Merging for Streamlined Production Deployment
 When deploying to high-throughput production environments:
 $$W_{merged} = W_0 + \frac{\alpha}{r} (A \cdot B)$$
-The low-rank delta is accumulated in-place directly into the base weights. The forward pass becomes a single matrix multiplication without any branch divergence or extra kernel launches:
+The low-rank delta is accumulated in-place directly into the base weights. This eliminates runtime adapter detour branching overhead, so inference execution is a single matrix multiplication matching standard base model execution without auxiliary LoRA branching operations:
 $$h = x \cdot W_{merged}$$
 
 ---
@@ -166,17 +166,20 @@ During inference, the prompt is formatted up to `Answer:`, allowing the model to
 
 ## Full Fine-Tuning vs LoRA Comparison
 
-| Metric | Full Fine-Tuning | LoRA ($r=8, \alpha=16$) | Efficiency Advantage |
+| Metric | Full Fine-Tuning | LoRA (=8, \alpha=16$) | Measured vs Theoretical Status |
 |---|---|---|---|
 | **Base Model** | GPT-2 (small) | GPT-2 (small) | Standard baseline |
-| **Total Parameters** | 124,439,808 | 124,439,808 | Identical base model |
-| **Trainable Parameters** | 124,439,808 (100%) | 294,912 (~0.24%) | **~422x fewer trainable weights** |
-| **Frozen Parameters** | 0 (0%) | 124,144,896 (~99.76%) | Preserves general linguistic knowledge |
-| **Optimizer Memory** | ~1,000 MB+ | ~2.3 MB | Fits comfortably in laptop RAM/VRAM |
-| **Checkpoint Storage** | ~497.7 MB | ~1.1 MB | **~452x storage reduction** |
+| **Total Parameters** | 124,439,808 | 124,734,720 | Programmatically verified |
+| **Trainable Parameters** | 124,439,808 (100%) | 294,912 (~0.236%) | Programmatically verified |
+| **Frozen Parameters** | 0 (0%) | 124,439,808 (~99.76%) | Programmatically verified |
+| **Process Memory (RSS)** | ~1,200 MB (Theoretical estimate) | ~568.9 MB | **Empirically Measured** |
+| **Checkpoint Storage** | ~497.7 MB | ~1.13 MB (1,188,073 bytes) | **Empirically Measured** |
+| **Storage Reduction** | Baseline (\times$) | ~440x smaller checkpoint | **Empirically Measured** |
 | **Catastrophic Forgetting** | High risk | Minimal risk | Base weights remain immutable |
-| **Deployment Overhead** | Single model per domain | Base model shared + tiny swap | Supports multi-tenant adapters |
-| **Inference Latency** | Baseline $1.0\times$ | Merged: $1.0\times$ (Zero-overhead) | No runtime latency penalty |
+| **Inference Latency** | Baseline .0\times$ | Merged: .0\times$ (No branch overhead) | Numerically verified within float32 |
+
+> **Note on Dataset Scale & Generalization Disclosure:**  
+> The included dataset contains 20 curated public service FAQ entries, partitioned into 14 training, 3 validation, and 3 test examples. Quantitative scores (such as token overlap grounding recall) calculated on this test subset are illustrative and educational, intended to demonstrate the mechanics of parameter-efficient adaptation rather than statistical generalization on open-domain NLP benchmarks.
 
 ---
 

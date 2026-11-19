@@ -392,6 +392,7 @@ with tab_chat:
         if best_match and best_score > 0.15:
             with st.expander("📌 Supporting Departmental Guideline & Verification Source", expanded=True):
                 st.write(f"**Department:** {best_match.category}")
+                st.write(f"**Jurisdiction / Standard:** {getattr(best_match, 'jurisdiction', 'Municipal Guideline Standard')}")
                 st.write(f"**Verified Policy:** {best_match.answer}")
                 st.write(f"**Official Source:** [{best_match.source}]({best_match.source})")
         else:

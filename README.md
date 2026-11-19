@@ -16,7 +16,7 @@ Tick these off as you go, and commit after each one.
 
 - [x] **1. Create a small dataset of public service FAQs and their answers.**  
       Hint: Data preparation & formatting
-- [ ] **2. Implement LoRA adapter injection and training on a pre-trained LLM (e.g., GPT-2).**  
+- [x] **2. Implement LoRA adapter injection and training on a pre-trained LLM (e.g., GPT-2).**  
       Hint: LoRA adapter injection & training (`lfllm-lflora`)
 - [ ] **3. Build a Streamlit interface where users can ask questions and get answers.**  
       Hint: Streamlit UI development

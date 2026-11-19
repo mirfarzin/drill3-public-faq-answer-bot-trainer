@@ -7,6 +7,14 @@ __pycache__/
 .venv/
 .pytest_cache/
 
-# Local data
-data/
+# Local data and checkpoints
+data/app.json
+data/*.tmp
 *.db
+checkpoints/
+adapters/
+models_saved/
+*.pt
+*.bin
+*.safetensors
+

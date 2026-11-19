@@ -14,7 +14,7 @@ This project develops a Public FAQ Answer Bot Trainer, empowering public service
 
 Tick these off as you go, and commit after each one.
 
-- [ ] **1. Create a small dataset of public service FAQs and their answers.**  
+- [x] **1. Create a small dataset of public service FAQs and their answers.**  
       Hint: Data preparation & formatting
 - [ ] **2. Implement LoRA adapter injection and training on a pre-trained LLM (e.g., GPT-2).**  
       Hint: LoRA adapter injection & training (`lfllm-lflora`)

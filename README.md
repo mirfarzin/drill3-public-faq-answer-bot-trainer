@@ -22,7 +22,7 @@ Tick these off as you go, and commit after each one.
       Hint: Streamlit UI development
 - [x] **4. Verify the accuracy and relevance of the generated answers.**  
       Hint: Qualitative evaluation
-- [ ] **5. Implement adapter merging for inference.**  
+- [x] **5. Implement adapter merging for inference.**  
       Hint: Adapter merging (`lfllm-lflora`)
 
 ## Run it
